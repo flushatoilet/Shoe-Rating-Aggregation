@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Basketball Shoes</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #1a1a1a; background: #fff; }
+
+    header {
+      background: linear-gradient(135deg, #e65100, #ff6d00);
+      color: #fff;
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+    header h1 { font-size: 2.5rem; letter-spacing: 2px; text-transform: uppercase; }
+    header p { margin-top: 0.5rem; font-size: 1.1rem; opacity: 0.9; }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 2rem 1rem; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    .card {
+      border: 1px solid #e0e0e0;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+
+    .card-img {
+      width: 100%;
+      height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+    }
+    .card-img.orange { background: #fff3e0; }
+    .card-img.blue   { background: #e3f2fd; }
+    .card-img.green  { background: #e8f5e9; }
+
+    .card-body { padding: 1.25rem; }
+    .card-body h3 { font-size: 1.25rem; margin-bottom: 0.4rem; }
+    .card-body .price { color: #e65100; font-weight: 700; font-size: 1.1rem; }
+    .card-body p { margin-top: 0.5rem; color: #555; font-size: 0.95rem; line-height: 1.5; }
+
+    .section-title { font-size: 1.75rem; text-align: center; margin-top: 2rem; }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: #fafafa;
+      color: #888;
+      font-size: 0.9rem;
+      margin-top: 3rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Basketball Shoes</h1>
+    <p>Top picks for the court</p>
+  </header>
+
+  <div class="container">
+    <h2 class="section-title">Featured Shoes</h2>
+    <div class="grid">
+
+      <div class="card">
+        <div class="card-img orange">&#128095;</div>
+        <div class="card-body">
+          <h3>Court Blazer Max</h3>
+          <span class="price">$159.99</span>
+          <p>Lightweight cushioning with a responsive midsole built for quick cuts and explosive drives to the basket.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img blue">&#128095;</div>
+        <div class="card-body">
+          <h3>Air Dunk Pro</h3>
+          <span class="price">$189.99</span>
+          <p>Maximum ankle support paired with a herringbone outsole for superior traction on any court surface.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img green">&#128095;</div>
+        <div class="card-body">
+          <h3>Rebound Elite</h3>
+          <span class="price">$144.99</span>
+          <p>Engineered mesh upper keeps your feet cool while the zoom unit delivers energy return on every step.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>&copy; 2026 Basketball Shoes</footer>
+</body>
+</html>
