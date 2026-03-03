@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Basketball Shoes</title>
+  <title>Basketball Shoes — RunRepeat Lab-Tested Stats</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #1a1a1a; background: #fff; }
@@ -17,13 +17,34 @@
     header h1 { font-size: 2.5rem; letter-spacing: 2px; text-transform: uppercase; }
     header p { margin-top: 0.5rem; font-size: 1.1rem; opacity: 0.9; }
 
-    .container { max-width: 1100px; margin: 0 auto; padding: 2rem 1rem; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 2rem 1rem; }
+
+    /* Filters */
+    .filters {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+    .filter-btn {
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      border: 1px solid #ccc;
+      background: #fff;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover { border-color: #e65100; color: #e65100; }
+    .filter-btn.active { background: #e65100; color: #fff; border-color: #e65100; }
 
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       gap: 2rem;
-      margin-top: 1.5rem;
+      margin-top: 1rem;
     }
 
     .card {
@@ -33,53 +54,70 @@
       transition: transform 0.2s, box-shadow 0.2s;
     }
     .card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+    .card.hidden { display: none; }
 
     .card-img {
       width: 100%;
-      height: 220px;
+      height: 180px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 5rem;
+      font-size: 4.5rem;
     }
-    .card-img.orange { background: #fff3e0; }
-    .card-img.blue   { background: #e3f2fd; }
-    .card-img.green  { background: #e8f5e9; }
+    .brand-nike    { background: #fff3e0; }
+    .brand-jordan  { background: #fce4ec; }
+    .brand-adidas  { background: #e3f2fd; }
+    .brand-nb      { background: #e8f5e9; }
+    .brand-puma    { background: #fff8e1; }
 
     .card-body { padding: 1.25rem; }
-    .card-body h3 { font-size: 1.25rem; margin-bottom: 0.4rem; }
-    .card-body .price { color: #e65100; font-weight: 700; font-size: 1.1rem; }
-    .card-body p { margin-top: 0.5rem; color: #555; font-size: 0.95rem; line-height: 1.5; }
+    .card-body h3 { font-size: 1.15rem; margin-bottom: 0.3rem; }
+    .card-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem; }
+    .card-meta .price { color: #e65100; font-weight: 700; font-size: 1.05rem; }
+    .card-meta .brand-tag {
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .tag-nike   { background: #fff3e0; color: #e65100; }
+    .tag-jordan { background: #fce4ec; color: #c62828; }
+    .tag-adidas { background: #e3f2fd; color: #1565c0; }
+    .tag-nb     { background: #e8f5e9; color: #2e7d32; }
+    .tag-puma   { background: #fff8e1; color: #f57f17; }
 
-    /* Stats bars */
-    .stats { margin-top: 1rem; }
-    .stats .stat-toggle {
+    .card-body p { margin-top: 0.4rem; color: #555; font-size: 0.88rem; line-height: 1.45; }
+
+    /* Stats */
+    .stats { margin-top: 0.75rem; }
+    .stat-toggle {
       background: none;
       border: 1px solid #e65100;
       color: #e65100;
-      padding: 0.4rem 1rem;
+      padding: 0.35rem 0.9rem;
       border-radius: 20px;
       cursor: pointer;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: 600;
       transition: background 0.2s, color 0.2s;
     }
-    .stats .stat-toggle:hover { background: #e65100; color: #fff; }
-    .stats .stat-toggle.active { background: #e65100; color: #fff; }
+    .stat-toggle:hover, .stat-toggle.active { background: #e65100; color: #fff; }
 
-    .stat-bars { margin-top: 0.75rem; display: none; }
+    .stat-bars { margin-top: 0.6rem; display: none; }
     .stat-bars.open { display: block; }
 
-    .stat-row { margin-bottom: 0.5rem; }
+    .stat-row { margin-bottom: 0.45rem; }
     .stat-row .stat-label {
       display: flex;
       justify-content: space-between;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       color: #555;
       margin-bottom: 2px;
     }
     .stat-row .stat-track {
-      height: 8px;
+      height: 7px;
       background: #eee;
       border-radius: 4px;
       overflow: hidden;
@@ -90,15 +128,16 @@
       width: 0;
       transition: width 0.6s ease;
     }
-    .stat-fill.cushioning { background: #e65100; }
-    .stat-fill.traction   { background: #1565c0; }
-    .stat-fill.support     { background: #2e7d32; }
-    .stat-fill.weight      { background: #6a1b9a; }
-    .stat-fill.breathability { background: #00838f; }
+    .fill-traction      { background: #e65100; }
+    .fill-cushioning    { background: #1565c0; }
+    .fill-support       { background: #2e7d32; }
+    .fill-weight        { background: #6a1b9a; }
+    .fill-breathability { background: #00838f; }
 
     .section-title { font-size: 1.75rem; text-align: center; margin-top: 2rem; }
+    .section-sub { text-align: center; color: #777; font-size: 0.9rem; margin-top: 0.3rem; margin-bottom: 1rem; }
 
-    /* Comparison tool */
+    /* Comparison */
     .compare-section {
       margin-top: 3rem;
       padding: 2rem;
@@ -106,7 +145,8 @@
       border-radius: 12px;
       border: 1px solid #e0e0e0;
     }
-    .compare-section h2 { text-align: center; margin-bottom: 1.5rem; font-size: 1.5rem; }
+    .compare-section h2 { text-align: center; margin-bottom: 0.3rem; font-size: 1.5rem; }
+    .compare-section .section-sub { margin-bottom: 1.5rem; }
 
     .compare-controls {
       display: flex;
@@ -119,71 +159,38 @@
       padding: 0.6rem 1rem;
       border-radius: 8px;
       border: 1px solid #ccc;
-      font-size: 1rem;
+      font-size: 0.95rem;
       background: #fff;
-      min-width: 180px;
+      min-width: 200px;
     }
-    .compare-controls .vs {
-      font-weight: 700;
-      font-size: 1.2rem;
-      color: #e65100;
-    }
+    .compare-controls .vs { font-weight: 700; font-size: 1.2rem; color: #e65100; }
     .compare-btn {
       padding: 0.6rem 1.5rem;
       background: #e65100;
       color: #fff;
       border: none;
       border-radius: 8px;
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 600;
       cursor: pointer;
       transition: background 0.2s;
     }
     .compare-btn:hover { background: #bf360c; }
 
-    .compare-result {
-      margin-top: 1.5rem;
-      display: none;
-    }
+    .compare-result { margin-top: 1.5rem; display: none; }
     .compare-result.open { display: block; }
 
-    .compare-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 0.5rem;
-    }
-    .compare-table th,
-    .compare-table td {
-      padding: 0.75rem 1rem;
-      text-align: center;
-      border-bottom: 1px solid #e0e0e0;
-    }
-    .compare-table th { background: #fff; font-size: 0.9rem; color: #888; text-transform: uppercase; letter-spacing: 1px; }
-    .compare-table td { font-size: 1rem; }
+    .compare-table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; }
+    .compare-table th, .compare-table td { padding: 0.6rem 0.75rem; text-align: center; border-bottom: 1px solid #e0e0e0; font-size: 0.9rem; }
+    .compare-table th { background: #fff; color: #888; text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem; }
     .compare-table td.winner { color: #e65100; font-weight: 700; }
 
     .compare-visual { margin-top: 1.5rem; }
-    .compare-stat-row {
-      display: flex;
-      align-items: center;
-      margin-bottom: 0.75rem;
-    }
-    .compare-stat-row .csr-label {
-      width: 110px;
-      font-size: 0.85rem;
-      color: #555;
-      text-align: right;
-      padding-right: 0.75rem;
-      flex-shrink: 0;
-    }
-    .compare-stat-row .csr-bars {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
+    .compare-stat-row { display: flex; align-items: center; margin-bottom: 0.6rem; }
+    .compare-stat-row .csr-label { width: 100px; font-size: 0.8rem; color: #555; text-align: right; padding-right: 0.75rem; flex-shrink: 0; }
+    .compare-stat-row .csr-bars { flex: 1; display: flex; align-items: center; gap: 3px; }
     .csr-bar-left, .csr-bar-right {
-      height: 20px;
+      height: 22px;
       border-radius: 4px;
       transition: width 0.6s ease;
       display: flex;
@@ -194,17 +201,10 @@
       font-weight: 600;
       min-width: 28px;
     }
-    .csr-bar-left { background: #e65100; border-radius: 4px 0 0 4px; }
+    .csr-bar-left  { background: #e65100; border-radius: 4px 0 0 4px; }
     .csr-bar-right { background: #1565c0; border-radius: 0 4px 4px 0; }
 
-    .compare-legend {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      margin-top: 0.5rem;
-      font-size: 0.85rem;
-      color: #555;
-    }
+    .compare-legend { display: flex; justify-content: center; gap: 2rem; margin-top: 0.5rem; font-size: 0.85rem; color: #555; }
     .compare-legend span::before {
       content: '';
       display: inline-block;
@@ -214,8 +214,16 @@
       margin-right: 6px;
       vertical-align: middle;
     }
-    .compare-legend .leg-left::before { background: #e65100; }
+    .compare-legend .leg-left::before  { background: #e65100; }
     .compare-legend .leg-right::before { background: #1565c0; }
+
+    .source-note {
+      text-align: center;
+      color: #999;
+      font-size: 0.8rem;
+      margin-top: 2rem;
+    }
+    .source-note a { color: #e65100; }
 
     footer {
       text-align: center;
@@ -225,101 +233,48 @@
       font-size: 0.9rem;
       margin-top: 3rem;
     }
+
+    @media (max-width: 640px) {
+      header h1 { font-size: 1.75rem; }
+      .grid { grid-template-columns: 1fr; }
+      .compare-controls select { min-width: 140px; }
+    }
   </style>
 </head>
 <body>
   <header>
     <h1>Basketball Shoes</h1>
-    <p>Top picks for the court</p>
+    <p>Lab-tested stats from RunRepeat</p>
   </header>
 
   <div class="container">
-    <h2 class="section-title">Featured Shoes</h2>
-    <div class="grid">
+    <h2 class="section-title">All Shoes</h2>
+    <p class="section-sub">Scores based on RunRepeat lab measurements — traction, cushioning, support, weight, and breathability</p>
 
-      <div class="card">
-        <div class="card-img orange">&#128095;</div>
-        <div class="card-body">
-          <h3>Court Blazer Max</h3>
-          <span class="price">$159.99</span>
-          <p>Lightweight cushioning with a responsive midsole built for quick cuts and explosive drives to the basket.</p>
-          <div class="stats">
-            <button class="stat-toggle" onclick="toggleStats(this)">Show Stats</button>
-            <div class="stat-bars" data-cushioning="88" data-traction="75" data-support="70" data-weight="92" data-breathability="85">
-              <div class="stat-row"><div class="stat-label"><span>Cushioning</span><span>88</span></div><div class="stat-track"><div class="stat-fill cushioning"></div></div></div>
-              <div class="stat-row"><div class="stat-label"><span>Traction</span><span>75</span></div><div class="stat-track"><div class="stat-fill traction"></div></div></div>
-              <div class="stat-row"><div class="stat-label"><span>Support</span><span>70</span></div><div class="stat-track"><div class="stat-fill support"></div></div></div>
-              <div class="stat-row"><div class="stat-label"><span>Weight</span><span>92</span></div><div class="stat-track"><div class="stat-fill weight"></div></div></div>
-              <div class="stat-row"><div class="stat-label"><span>Breathability</span><span>85</span></div><div class="stat-track"><div class="stat-fill breathability"></div></div></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-img blue">&#128095;</div>
-        <div class="card-body">
-          <h3>Air Dunk Pro</h3>
-          <span class="price">$189.99</span>
-          <p>Maximum ankle support paired with a herringbone outsole for superior traction on any court surface.</p>
-          <div class="stats">
-            <button class="stat-toggle" onclick="toggleStats(this)">Show Stats</button>
-            <div class="stat-bars" data-cushioning="80" data-traction="95" data-support="93" data-weight="65" data-breathability="72">
-              <div class="stat-row"><div class="stat-label"><span>Cushioning</span><span>80</span></div><div class="stat-track"><div class="stat-fill cushioning"></div></div></div>
-              <div class="stat-row"><div class="stat-label"><span>Traction</span><span>95</span></div><div class="stat-track"><div class="stat-fill traction"></div></div></div>
-              <div class="stat-row"><div class="stat-label"><span>Support</span><span>93</span></div><div class="stat-track"><div class="stat-fill support"></div></div></div>
-              <div class="stat-row"><div class="stat-label"><span>Weight</span><span>65</span></div><div class="stat-track"><div class="stat-fill weight"></div></div></div>
-              <div class="stat-row"><div class="stat-label"><span>Breathability</span><span>72</span></div><div class="stat-track"><div class="stat-fill breathability"></div></div></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-img green">&#128095;</div>
-        <div class="card-body">
-          <h3>Rebound Elite</h3>
-          <span class="price">$144.99</span>
-          <p>Engineered mesh upper keeps your feet cool while the zoom unit delivers energy return on every step.</p>
-          <div class="stats">
-            <button class="stat-toggle" onclick="toggleStats(this)">Show Stats</button>
-            <div class="stat-bars" data-cushioning="82" data-traction="78" data-support="75" data-weight="88" data-breathability="96">
-              <div class="stat-row"><div class="stat-label"><span>Cushioning</span><span>82</span></div><div class="stat-track"><div class="stat-fill cushioning"></div></div></div>
-              <div class="stat-row"><div class="stat-label"><span>Traction</span><span>78</span></div><div class="stat-track"><div class="stat-fill traction"></div></div></div>
-              <div class="stat-row"><div class="stat-label"><span>Support</span><span>75</span></div><div class="stat-track"><div class="stat-fill support"></div></div></div>
-              <div class="stat-row"><div class="stat-label"><span>Weight</span><span>88</span></div><div class="stat-track"><div class="stat-fill weight"></div></div></div>
-              <div class="stat-row"><div class="stat-label"><span>Breathability</span><span>96</span></div><div class="stat-track"><div class="stat-fill breathability"></div></div></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
+    <div class="filters">
+      <button class="filter-btn active" onclick="filterBrand('all')">All</button>
+      <button class="filter-btn" onclick="filterBrand('nike')">Nike</button>
+      <button class="filter-btn" onclick="filterBrand('jordan')">Jordan</button>
+      <button class="filter-btn" onclick="filterBrand('adidas')">Adidas</button>
+      <button class="filter-btn" onclick="filterBrand('nb')">New Balance</button>
+      <button class="filter-btn" onclick="filterBrand('puma')">Puma</button>
     </div>
+
+    <div class="grid" id="shoe-grid"></div>
 
     <!-- Comparison Tool -->
     <div class="compare-section">
       <h2>Compare Shoes</h2>
+      <p class="section-sub">Pick any two shoes and see them head-to-head</p>
       <div class="compare-controls">
-        <select id="shoe-left">
-          <option value="">Select a shoe...</option>
-          <option value="court-blazer-max">Court Blazer Max</option>
-          <option value="air-dunk-pro">Air Dunk Pro</option>
-          <option value="rebound-elite">Rebound Elite</option>
-        </select>
+        <select id="shoe-left"></select>
         <span class="vs">VS</span>
-        <select id="shoe-right">
-          <option value="">Select a shoe...</option>
-          <option value="court-blazer-max">Court Blazer Max</option>
-          <option value="air-dunk-pro">Air Dunk Pro</option>
-          <option value="rebound-elite">Rebound Elite</option>
-        </select>
+        <select id="shoe-right"></select>
         <button class="compare-btn" onclick="compare()">Compare</button>
       </div>
       <div class="compare-result" id="compare-result">
         <table class="compare-table">
-          <thead>
-            <tr><th>Stat</th><th id="cmp-name-left"></th><th id="cmp-name-right"></th></tr>
-          </thead>
+          <thead><tr><th>Stat</th><th id="cmp-name-left"></th><th id="cmp-name-right"></th></tr></thead>
           <tbody id="cmp-tbody"></tbody>
         </table>
         <div class="compare-visual" id="compare-visual"></div>
@@ -329,18 +284,171 @@
         </div>
       </div>
     </div>
+
+    <p class="source-note">
+      Stats sourced from <a href="https://runrepeat.com/catalog/basketball-shoes" target="_blank" rel="noopener">RunRepeat</a> lab-tested reviews.
+      Traction = friction coefficient &times; 100. Cushioning = heel shock absorption mapped to 0–100.
+      Support = avg of torsional rigidity &amp; heel counter stiffness. Weight = lightness score (lighter&nbsp;=&nbsp;higher). Breathability = /5 &times; 20.
+    </p>
   </div>
 
   <footer>&copy; 2026 Basketball Shoes</footer>
 
   <script>
-    var shoes = {
-      'court-blazer-max': { name: 'Court Blazer Max', price: '$159.99', cushioning: 88, traction: 75, support: 70, weight: 92, breathability: 85 },
-      'air-dunk-pro':     { name: 'Air Dunk Pro',     price: '$189.99', cushioning: 80, traction: 95, support: 93, weight: 65, breathability: 72 },
-      'rebound-elite':    { name: 'Rebound Elite',    price: '$144.99', cushioning: 82, traction: 78, support: 75, weight: 88, breathability: 96 }
-    };
+    var shoes = [
+      {
+        id: 'nike-lebron-23', name: 'Nike LeBron 23', brand: 'nike', price: '$210',
+        desc: 'Best overall. ZoomX foam delivers elite cushioning (112 SA) with 70%+ energy return and maximum stability.',
+        traction: 77, cushioning: 93, support: 100, weight: 10, breathability: 20
+      },
+      {
+        id: 'nike-kd-18', name: 'Nike KD 18', brand: 'nike', price: '$175',
+        desc: 'Best traction in the game. Record 0.89 friction coefficient with above-average cushioning at 115 SA heel.',
+        traction: 89, cushioning: 96, support: 80, weight: 22, breathability: 70
+      },
+      {
+        id: 'nike-gt-cut-3', name: 'Nike G.T. Cut 3', brand: 'nike', price: '$190',
+        desc: 'Shifty guard shoe with ZoomX cushioning and great energy return. Low breathability but maximum torsional rigidity.',
+        traction: 73, cushioning: 85, support: 80, weight: 84, breathability: 20
+      },
+      {
+        id: 'nike-gt-cut-3-turbo', name: 'Nike G.T. Cut 3 Turbo', brand: 'nike', price: '$210',
+        desc: 'Record-breaking 83.2% forefoot energy return. Category-leading 0.81 friction with improved lateral support.',
+        traction: 81, cushioning: 83, support: 90, weight: 82, breathability: 20
+      },
+      {
+        id: 'nike-gt-hustle-3', name: 'Nike G.T. Hustle 3', brand: 'nike', price: '$190',
+        desc: 'Best shock absorption ever tested — 117 SA heel, 120 SA forefoot. Phenomenal 81.5% forefoot energy return.',
+        traction: 68, cushioning: 99, support: 80, weight: 58, breathability: 50
+      },
+      {
+        id: 'nike-sabrina-3', name: 'Nike Sabrina 3', brand: 'nike', price: '$140',
+        desc: 'Lightweight at 12.4 oz with fantastic lateral stability. Flexible, agile, and great for quick guards.',
+        traction: 67, cushioning: 80, support: 90, weight: 72, breathability: 60
+      },
+      {
+        id: 'nike-lebron-witness-9', name: 'Nike LeBron Witness 9', brand: 'nike', price: '$105',
+        desc: 'Best budget traction at 0.84 friction. Full-length ReactX foam, maximum heel counter stiffness, outdoor-ready.',
+        traction: 84, cushioning: 83, support: 90, weight: 40, breathability: 40
+      },
+      {
+        id: 'nike-ja-2', name: 'Nike Ja 2', brand: 'nike', price: '$130',
+        desc: 'Speed-oriented and lightweight with excellent breathability (4/5). Solid 0.77 traction for quick cuts.',
+        traction: 77, cushioning: 78, support: 80, weight: 80, breathability: 80
+      },
+      {
+        id: 'nike-book-1', name: 'Nike Book 1', brand: 'nike', price: '$140',
+        desc: 'Stability and traction standout with 0.79 friction. Zoom Air heel, herringbone outsole, great for skilled guards.',
+        traction: 79, cushioning: 87, support: 90, weight: 50, breathability: 20
+      },
+      {
+        id: 'nike-giannis-immortality-4', name: 'Nike Giannis Immortality 4', brand: 'nike', price: '$85',
+        desc: 'Best value — $85 with 5/5 torsional rigidity and 5/5 heel counter. Lightweight at 12.6 oz with solid traction.',
+        traction: 74, cushioning: 84, support: 100, weight: 68, breathability: 50
+      },
+      {
+        id: 'nike-giannis-freak-6', name: 'Nike Giannis Freak 6', brand: 'nike', price: '$140',
+        desc: 'Impeccable 0.85 traction for sprints and pivots. Built for agility and speed with a versatile, balanced ride.',
+        traction: 85, cushioning: 77, support: 60, weight: 60, breathability: 50
+      },
+      {
+        id: 'air-jordan-40', name: 'Air Jordan 40', brand: 'jordan', price: '$205',
+        desc: 'Premium with ZoomX + Zoom Strobel. Excellent 0.80 traction, 5/5 torsional rigidity. Heavy at 15.5 oz.',
+        traction: 80, cushioning: 73, support: 90, weight: 10, breathability: 20
+      },
+      {
+        id: 'jordan-zion-4', name: 'Jordan Zion 4', brand: 'jordan', price: '$140',
+        desc: 'Elite shock absorption — 113 SA heel, 93 SA forefoot. Full-length Air Zoom strobel with 71.8% energy return.',
+        traction: 71, cushioning: 94, support: 90, weight: 60, breathability: 50
+      },
+      {
+        id: 'jordan-tatum-4', name: 'Jordan Tatum 4', brand: 'jordan', price: '$130',
+        desc: 'Ultra-lightweight and low-profile. Caution: only 0.49 traction and 34 SA forefoot — lowest ever tested.',
+        traction: 49, cushioning: 56, support: 80, weight: 72, breathability: 20
+      },
+      {
+        id: 'jordan-luka-3', name: 'Jordan Luka 3', brand: 'jordan', price: '$130',
+        desc: 'Reliable 0.77 traction with maximum 5/5 torsional rigidity. Balanced court-feel for shifty playmakers.',
+        traction: 77, cushioning: 82, support: 100, weight: 50, breathability: 60
+      },
+      {
+        id: 'adidas-don-issue-7', name: 'Adidas D.O.N. Issue 7', brand: 'adidas', price: '$120',
+        desc: 'Best Adidas traction at 0.87 friction. Maximum 5/5 torsional rigidity with a wide, stable platform.',
+        traction: 87, cushioning: 84, support: 90, weight: 44, breathability: 40
+      },
+      {
+        id: 'adidas-ae-2', name: 'Adidas Anthony Edwards 2', brand: 'adidas', price: '$150',
+        desc: 'BOOST + Lightstrike cushioning with great durability. Traction dropped from AE 1 — moderate 0.61 friction.',
+        traction: 61, cushioning: 83, support: 80, weight: 30, breathability: 60
+      },
+      {
+        id: 'adidas-harden-vol-9', name: 'Adidas Harden Vol. 9', brand: 'adidas', price: '$160',
+        desc: 'Excellent breathability (4/5) with springy LightBOOST cushioning. Above-average 107 SA heel shock absorption.',
+        traction: 70, cushioning: 89, support: 80, weight: 40, breathability: 80
+      },
+      {
+        id: 'nb-two-wxy-v5', name: 'New Balance TWO WXY V5', brand: 'nb', price: '$120',
+        desc: 'Best ankle support. 5/5 torsional + 5/5 heel counter. FuelCell/Fresh Foam combo, great for outdoor courts.',
+        traction: 74, cushioning: 84, support: 100, weight: 44, breathability: 60
+      },
+      {
+        id: 'puma-all-pro-nitro', name: 'Puma All Pro Nitro', brand: 'puma', price: '$130',
+        desc: 'Exceptional 0.88 traction rivaling the KD 18. Dual-density Nitro foam with solid breathability (4/5).',
+        traction: 88, cushioning: 82, support: 85, weight: 60, breathability: 80
+      }
+    ];
 
-    var statKeys = ['cushioning', 'traction', 'support', 'weight', 'breathability'];
+    var statKeys = ['traction', 'cushioning', 'support', 'weight', 'breathability'];
+    var statLabels = { traction: 'Traction', cushioning: 'Cushioning', support: 'Support', weight: 'Weight', breathability: 'Breathability' };
+    var brandColors = { nike: 'brand-nike', jordan: 'brand-jordan', adidas: 'brand-adidas', nb: 'brand-nb', puma: 'brand-puma' };
+    var tagColors = { nike: 'tag-nike', jordan: 'tag-jordan', adidas: 'tag-adidas', nb: 'tag-nb', puma: 'tag-puma' };
+    var brandNames = { nike: 'Nike', jordan: 'Jordan', adidas: 'Adidas', nb: 'New Balance', puma: 'Puma' };
+
+    // Build shoe lookup
+    var shoeLookup = {};
+    shoes.forEach(function(s) { shoeLookup[s.id] = s; });
+
+    // Render cards
+    function renderCards() {
+      var grid = document.getElementById('shoe-grid');
+      grid.innerHTML = '';
+      shoes.forEach(function(s) {
+        var card = document.createElement('div');
+        card.className = 'card';
+        card.setAttribute('data-brand', s.brand);
+        card.innerHTML =
+          '<div class="card-img ' + brandColors[s.brand] + '">&#128095;</div>' +
+          '<div class="card-body">' +
+            '<h3>' + s.name + '</h3>' +
+            '<div class="card-meta">' +
+              '<span class="price">' + s.price + '</span>' +
+              '<span class="brand-tag ' + tagColors[s.brand] + '">' + brandNames[s.brand] + '</span>' +
+            '</div>' +
+            '<p>' + s.desc + '</p>' +
+            '<div class="stats">' +
+              '<button class="stat-toggle" onclick="toggleStats(this)">Show Stats</button>' +
+              '<div class="stat-bars" data-traction="' + s.traction + '" data-cushioning="' + s.cushioning + '" data-support="' + s.support + '" data-weight="' + s.weight + '" data-breathability="' + s.breathability + '">' +
+                statKeys.map(function(k) {
+                  return '<div class="stat-row"><div class="stat-label"><span>' + statLabels[k] + '</span><span>' + s[k] + '</span></div><div class="stat-track"><div class="stat-fill fill-' + k + '"></div></div></div>';
+                }).join('') +
+              '</div>' +
+            '</div>' +
+          '</div>';
+        grid.appendChild(card);
+      });
+    }
+
+    // Populate selects
+    function populateSelects() {
+      var selL = document.getElementById('shoe-left');
+      var selR = document.getElementById('shoe-right');
+      var opts = '<option value="">Select a shoe...</option>';
+      shoes.forEach(function(s) {
+        opts += '<option value="' + s.id + '">' + s.name + ' (' + s.price + ')</option>';
+      });
+      selL.innerHTML = opts;
+      selR.innerHTML = opts;
+    }
 
     function toggleStats(btn) {
       var bars = btn.nextElementSibling;
@@ -350,13 +458,25 @@
       if (isOpen) {
         var fills = bars.querySelectorAll('.stat-fill');
         fills.forEach(function(fill) {
-          var key = fill.classList[1];
-          var val = bars.getAttribute('data-' + key);
+          var cls = fill.className.replace('stat-fill fill-', '');
+          var val = bars.getAttribute('data-' + cls);
           setTimeout(function() { fill.style.width = val + '%'; }, 50);
         });
       } else {
         bars.querySelectorAll('.stat-fill').forEach(function(f) { f.style.width = '0'; });
       }
+    }
+
+    function filterBrand(brand) {
+      document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+      event.target.classList.add('active');
+      document.querySelectorAll('.card').forEach(function(c) {
+        if (brand === 'all' || c.getAttribute('data-brand') === brand) {
+          c.classList.remove('hidden');
+        } else {
+          c.classList.add('hidden');
+        }
+      });
     }
 
     function compare() {
@@ -365,8 +485,8 @@
       if (!leftId || !rightId) { alert('Please select two shoes to compare.'); return; }
       if (leftId === rightId) { alert('Please select two different shoes.'); return; }
 
-      var left = shoes[leftId];
-      var right = shoes[rightId];
+      var left = shoeLookup[leftId];
+      var right = shoeLookup[rightId];
       var result = document.getElementById('compare-result');
 
       document.getElementById('cmp-name-left').textContent = left.name;
@@ -376,18 +496,17 @@
       tbody.innerHTML = '';
 
       // Price row
-      var priceRow = document.createElement('tr');
-      priceRow.innerHTML = '<td>Price</td><td>' + left.price + '</td><td>' + right.price + '</td>';
-      tbody.appendChild(priceRow);
+      var pr = document.createElement('tr');
+      pr.innerHTML = '<td>Price</td><td>' + left.price + '</td><td>' + right.price + '</td>';
+      tbody.appendChild(pr);
 
       statKeys.forEach(function(key) {
         var tr = document.createElement('tr');
-        var label = key.charAt(0).toUpperCase() + key.slice(1);
         var lVal = left[key];
         var rVal = right[key];
         var lClass = lVal > rVal ? ' class="winner"' : '';
         var rClass = rVal > lVal ? ' class="winner"' : '';
-        tr.innerHTML = '<td>' + label + '</td><td' + lClass + '>' + lVal + '</td><td' + rClass + '>' + rVal + '</td>';
+        tr.innerHTML = '<td>' + statLabels[key] + '</td><td' + lClass + '>' + lVal + '</td><td' + rClass + '>' + rVal + '</td>';
         tbody.appendChild(tr);
       });
 
@@ -397,21 +516,19 @@
       statKeys.forEach(function(key) {
         var lVal = left[key];
         var rVal = right[key];
-        var total = lVal + rVal;
+        var total = lVal + rVal || 1;
         var lPct = (lVal / total * 100).toFixed(1);
         var rPct = (rVal / total * 100).toFixed(1);
-        var label = key.charAt(0).toUpperCase() + key.slice(1);
 
         var row = document.createElement('div');
         row.className = 'compare-stat-row';
         row.innerHTML =
-          '<div class="csr-label">' + label + '</div>' +
+          '<div class="csr-label">' + statLabels[key] + '</div>' +
           '<div class="csr-bars">' +
             '<div class="csr-bar-left" style="width:0">' + lVal + '</div>' +
             '<div class="csr-bar-right" style="width:0">' + rVal + '</div>' +
           '</div>';
         visual.appendChild(row);
-
         setTimeout(function() {
           row.querySelector('.csr-bar-left').style.width = lPct + '%';
           row.querySelector('.csr-bar-right').style.width = rPct + '%';
@@ -420,9 +537,12 @@
 
       document.getElementById('leg-left-name').textContent = left.name;
       document.getElementById('leg-right-name').textContent = right.name;
-
       result.classList.add('open');
     }
+
+    // Init
+    renderCards();
+    populateSelects();
   </script>
 </body>
 </html>
