@@ -128,11 +128,29 @@
       width: 0;
       transition: width 0.6s ease;
     }
+    .fill-overall       { background: linear-gradient(90deg, #e65100, #ff9800); }
     .fill-traction      { background: #e65100; }
     .fill-cushioning    { background: #1565c0; }
     .fill-support       { background: #2e7d32; }
     .fill-weight        { background: #6a1b9a; }
     .fill-breathability { background: #00838f; }
+
+    .overall-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      background: linear-gradient(135deg, #e65100, #ff9800);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 0.2rem 0.65rem;
+      border-radius: 6px;
+      margin-top: 0.5rem;
+    }
+    .overall-badge .ob-label { font-weight: 400; font-size: 0.75rem; opacity: 0.9; }
+
+    .stat-row.stat-overall .stat-label { font-weight: 700; color: #e65100; }
+    .stat-row.stat-overall .stat-track { height: 9px; }
 
     .section-title { font-size: 1.75rem; text-align: center; margin-top: 2rem; }
     .section-sub { text-align: center; color: #777; font-size: 0.9rem; margin-top: 0.3rem; margin-bottom: 1rem; }
@@ -287,6 +305,7 @@
 
     <p class="source-note">
       Stats sourced from <a href="https://runrepeat.com/catalog/basketball-shoes" target="_blank" rel="noopener">RunRepeat</a> lab-tested reviews.
+      Overall = weighted average — Traction&nbsp;30%, Cushioning&nbsp;25%, Support&nbsp;25%, Weight&nbsp;12%, Breathability&nbsp;8%.
       Traction = friction coefficient &times; 100. Cushioning = heel shock absorption mapped to 0–100.
       Support = avg of torsional rigidity &amp; heel counter stiffness. Weight = lightness score (lighter&nbsp;=&nbsp;higher). Breathability = /5 &times; 20.
     </p>
@@ -398,8 +417,27 @@
       }
     ];
 
-    var statKeys = ['traction', 'cushioning', 'support', 'weight', 'breathability'];
-    var statLabels = { traction: 'Traction', cushioning: 'Cushioning', support: 'Support', weight: 'Weight', breathability: 'Breathability' };
+    // Overall rating weights — what matters most on the court
+    // Traction 30%: grip is king — every cut, stop, and pivot depends on it
+    // Cushioning 25%: impact protection keeps joints safe on hard landings
+    // Support 25%: ankle stability and lateral containment prevent injuries
+    // Weight 12%: lighter shoes help speed/agility, but secondary to the big 3
+    // Breathability 8%: comfort factor, least direct impact on performance
+    var weights = { traction: 0.30, cushioning: 0.25, support: 0.25, weight: 0.12, breathability: 0.08 };
+
+    // Compute overall for each shoe
+    shoes.forEach(function(s) {
+      s.overall = Math.round(
+        s.traction * weights.traction +
+        s.cushioning * weights.cushioning +
+        s.support * weights.support +
+        s.weight * weights.weight +
+        s.breathability * weights.breathability
+      );
+    });
+
+    var statKeys = ['overall', 'traction', 'cushioning', 'support', 'weight', 'breathability'];
+    var statLabels = { overall: 'Overall', traction: 'Traction', cushioning: 'Cushioning', support: 'Support', weight: 'Weight', breathability: 'Breathability' };
     var brandColors = { nike: 'brand-nike', jordan: 'brand-jordan', adidas: 'brand-adidas', nb: 'brand-nb', puma: 'brand-puma' };
     var tagColors = { nike: 'tag-nike', jordan: 'tag-jordan', adidas: 'tag-adidas', nb: 'tag-nb', puma: 'tag-puma' };
     var brandNames = { nike: 'Nike', jordan: 'Jordan', adidas: 'Adidas', nb: 'New Balance', puma: 'Puma' };
@@ -416,6 +454,7 @@
         var card = document.createElement('div');
         card.className = 'card';
         card.setAttribute('data-brand', s.brand);
+        var dataAttrs = statKeys.map(function(k) { return 'data-' + k + '="' + s[k] + '"'; }).join(' ');
         card.innerHTML =
           '<div class="card-img ' + brandColors[s.brand] + '">&#128095;</div>' +
           '<div class="card-body">' +
@@ -424,12 +463,14 @@
               '<span class="price">' + s.price + '</span>' +
               '<span class="brand-tag ' + tagColors[s.brand] + '">' + brandNames[s.brand] + '</span>' +
             '</div>' +
+            '<div class="overall-badge">' + s.overall + ' <span class="ob-label">overall</span></div>' +
             '<p>' + s.desc + '</p>' +
             '<div class="stats">' +
               '<button class="stat-toggle" onclick="toggleStats(this)">Show Stats</button>' +
-              '<div class="stat-bars" data-traction="' + s.traction + '" data-cushioning="' + s.cushioning + '" data-support="' + s.support + '" data-weight="' + s.weight + '" data-breathability="' + s.breathability + '">' +
+              '<div class="stat-bars" ' + dataAttrs + '>' +
                 statKeys.map(function(k) {
-                  return '<div class="stat-row"><div class="stat-label"><span>' + statLabels[k] + '</span><span>' + s[k] + '</span></div><div class="stat-track"><div class="stat-fill fill-' + k + '"></div></div></div>';
+                  var extraClass = k === 'overall' ? ' stat-overall' : '';
+                  return '<div class="stat-row' + extraClass + '"><div class="stat-label"><span>' + statLabels[k] + '</span><span>' + s[k] + '</span></div><div class="stat-track"><div class="stat-fill fill-' + k + '"></div></div></div>';
                 }).join('') +
               '</div>' +
             '</div>' +
