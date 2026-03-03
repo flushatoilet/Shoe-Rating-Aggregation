@@ -69,6 +69,7 @@
     .brand-adidas  { background: #e3f2fd; }
     .brand-nb      { background: #e8f5e9; }
     .brand-puma    { background: #fff8e1; }
+    .brand-ua      { background: #f3e5f5; }
 
     .card-body { padding: 1.25rem; }
     .card-body h3 { font-size: 1.15rem; margin-bottom: 0.3rem; }
@@ -87,6 +88,7 @@
     .tag-adidas { background: #e3f2fd; color: #1565c0; }
     .tag-nb     { background: #e8f5e9; color: #2e7d32; }
     .tag-puma   { background: #fff8e1; color: #f57f17; }
+    .tag-ua     { background: #f3e5f5; color: #6a1b9a; }
 
     .card-body p { margin-top: 0.4rem; color: #555; font-size: 0.88rem; line-height: 1.45; }
 
@@ -276,6 +278,7 @@
       <button class="filter-btn" onclick="filterBrand('adidas')">Adidas</button>
       <button class="filter-btn" onclick="filterBrand('nb')">New Balance</button>
       <button class="filter-btn" onclick="filterBrand('puma')">Puma</button>
+      <button class="filter-btn" onclick="filterBrand('ua')">Under Armour</button>
     </div>
 
     <div class="grid" id="shoe-grid"></div>
@@ -414,6 +417,46 @@
         id: 'puma-all-pro-nitro', name: 'Puma All Pro Nitro', brand: 'puma', price: '$130',
         desc: 'Exceptional 0.88 traction rivaling the KD 18. Dual-density Nitro foam with solid breathability (4/5).',
         traction: 88, cushioning: 82, support: 85, weight: 60, breathability: 80
+      },
+      {
+        id: 'nike-giannis-freak-7', name: 'Nike Giannis Freak 7', brand: 'nike', price: '$120',
+        desc: 'Maximum 5/5 torsional rigidity and 5/5 heel counter. Softer Cushlon 3.0 midsole with 0.77 friction and superb outsole durability.',
+        traction: 77, cushioning: 84, support: 100, weight: 50, breathability: 40
+      },
+      {
+        id: 'nike-aone', name: "Nike A'One", brand: 'nike', price: '$110',
+        desc: "A'Ja Wilson's first signature shoe. Outstanding 109 SA heel cushioning with 66.5% forefoot energy return at a budget price.",
+        traction: 72, cushioning: 90, support: 75, weight: 64, breathability: 20
+      },
+      {
+        id: 'puma-all-pro-nitro-2', name: 'Puma All Pro Nitro 2', brand: 'puma', price: '$130',
+        desc: 'Best all-around Puma. High 0.76 friction with excellent 4/5 breathability and virtually indestructible outsole (0.5 mm dent).',
+        traction: 76, cushioning: 80, support: 85, weight: 50, breathability: 80
+      },
+      {
+        id: 'nike-ja-3', name: 'Nike Ja 3', brand: 'nike', price: '$140',
+        desc: 'Dual-layer ZoomX cushioning in a rubber cupsole cage. Incredibly grippy outsole is the highlight — built for fast, explosive guards.',
+        traction: 80, cushioning: 80, support: 65, weight: 78, breathability: 70
+      },
+      {
+        id: 'nike-book-2', name: 'Nike Book 2', brand: 'nike', price: '$145',
+        desc: 'Forefoot Air Zoom + Cushlon 3.0 with wide outrigger for stability. Sticky indoor traction but stiff, heat-trapping upper.',
+        traction: 75, cushioning: 85, support: 90, weight: 45, breathability: 20
+      },
+      {
+        id: 'jordan-luka-5', name: 'Jordan Luka 5', brand: 'jordan', price: '$135',
+        desc: 'Full-length Zoom Strobel with ISOband for bouncy, responsive ride. Strong lockdown via internal booty and TPU clip. Dust-sensitive traction.',
+        traction: 73, cushioning: 87, support: 90, weight: 60, breathability: 40
+      },
+      {
+        id: 'ua-curry-12', name: 'Under Armour Curry 12', brand: 'ua', price: '$160',
+        desc: 'Best Curry ever. Dual-density Flow foam with fragmented Pebax plate delivers elite traction and the most comfortable Curry ride to date.',
+        traction: 85, cushioning: 85, support: 75, weight: 70, breathability: 60
+      },
+      {
+        id: 'adidas-harden-vol-10', name: 'Adidas Harden Vol. 10', brand: 'adidas', price: '$170',
+        desc: 'Improved traction over Vol. 9 with refined LightBOOST cushioning. Rated 8.6 by experts — reliable traction and strong support features.',
+        traction: 75, cushioning: 90, support: 82, weight: 42, breathability: 78
       }
     ];
 
@@ -438,9 +481,9 @@
 
     var statKeys = ['overall', 'traction', 'cushioning', 'support', 'weight', 'breathability'];
     var statLabels = { overall: 'Overall', traction: 'Traction', cushioning: 'Cushioning', support: 'Support', weight: 'Weight', breathability: 'Breathability' };
-    var brandColors = { nike: 'brand-nike', jordan: 'brand-jordan', adidas: 'brand-adidas', nb: 'brand-nb', puma: 'brand-puma' };
-    var tagColors = { nike: 'tag-nike', jordan: 'tag-jordan', adidas: 'tag-adidas', nb: 'tag-nb', puma: 'tag-puma' };
-    var brandNames = { nike: 'Nike', jordan: 'Jordan', adidas: 'Adidas', nb: 'New Balance', puma: 'Puma' };
+    var brandColors = { nike: 'brand-nike', jordan: 'brand-jordan', adidas: 'brand-adidas', nb: 'brand-nb', puma: 'brand-puma', ua: 'brand-ua' };
+    var tagColors = { nike: 'tag-nike', jordan: 'tag-jordan', adidas: 'tag-adidas', nb: 'tag-nb', puma: 'tag-puma', ua: 'tag-ua' };
+    var brandNames = { nike: 'Nike', jordan: 'Jordan', adidas: 'Adidas', nb: 'New Balance', puma: 'Puma', ua: 'Under Armour' };
 
     // Build shoe lookup
     var shoeLookup = {};
