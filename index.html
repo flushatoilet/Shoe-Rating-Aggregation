@@ -51,7 +51,171 @@
     .card-body .price { color: #e65100; font-weight: 700; font-size: 1.1rem; }
     .card-body p { margin-top: 0.5rem; color: #555; font-size: 0.95rem; line-height: 1.5; }
 
+    /* Stats bars */
+    .stats { margin-top: 1rem; }
+    .stats .stat-toggle {
+      background: none;
+      border: 1px solid #e65100;
+      color: #e65100;
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: background 0.2s, color 0.2s;
+    }
+    .stats .stat-toggle:hover { background: #e65100; color: #fff; }
+    .stats .stat-toggle.active { background: #e65100; color: #fff; }
+
+    .stat-bars { margin-top: 0.75rem; display: none; }
+    .stat-bars.open { display: block; }
+
+    .stat-row { margin-bottom: 0.5rem; }
+    .stat-row .stat-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: #555;
+      margin-bottom: 2px;
+    }
+    .stat-row .stat-track {
+      height: 8px;
+      background: #eee;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .stat-row .stat-fill {
+      height: 100%;
+      border-radius: 4px;
+      width: 0;
+      transition: width 0.6s ease;
+    }
+    .stat-fill.cushioning { background: #e65100; }
+    .stat-fill.traction   { background: #1565c0; }
+    .stat-fill.support     { background: #2e7d32; }
+    .stat-fill.weight      { background: #6a1b9a; }
+    .stat-fill.breathability { background: #00838f; }
+
     .section-title { font-size: 1.75rem; text-align: center; margin-top: 2rem; }
+
+    /* Comparison tool */
+    .compare-section {
+      margin-top: 3rem;
+      padding: 2rem;
+      background: #fafafa;
+      border-radius: 12px;
+      border: 1px solid #e0e0e0;
+    }
+    .compare-section h2 { text-align: center; margin-bottom: 1.5rem; font-size: 1.5rem; }
+
+    .compare-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .compare-controls select {
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      background: #fff;
+      min-width: 180px;
+    }
+    .compare-controls .vs {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #e65100;
+    }
+    .compare-btn {
+      padding: 0.6rem 1.5rem;
+      background: #e65100;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .compare-btn:hover { background: #bf360c; }
+
+    .compare-result {
+      margin-top: 1.5rem;
+      display: none;
+    }
+    .compare-result.open { display: block; }
+
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .compare-table th,
+    .compare-table td {
+      padding: 0.75rem 1rem;
+      text-align: center;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .compare-table th { background: #fff; font-size: 0.9rem; color: #888; text-transform: uppercase; letter-spacing: 1px; }
+    .compare-table td { font-size: 1rem; }
+    .compare-table td.winner { color: #e65100; font-weight: 700; }
+
+    .compare-visual { margin-top: 1.5rem; }
+    .compare-stat-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+    .compare-stat-row .csr-label {
+      width: 110px;
+      font-size: 0.85rem;
+      color: #555;
+      text-align: right;
+      padding-right: 0.75rem;
+      flex-shrink: 0;
+    }
+    .compare-stat-row .csr-bars {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .csr-bar-left, .csr-bar-right {
+      height: 20px;
+      border-radius: 4px;
+      transition: width 0.6s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      color: #fff;
+      font-weight: 600;
+      min-width: 28px;
+    }
+    .csr-bar-left { background: #e65100; border-radius: 4px 0 0 4px; }
+    .csr-bar-right { background: #1565c0; border-radius: 0 4px 4px 0; }
+
+    .compare-legend {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      color: #555;
+    }
+    .compare-legend span::before {
+      content: '';
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+    .compare-legend .leg-left::before { background: #e65100; }
+    .compare-legend .leg-right::before { background: #1565c0; }
 
     footer {
       text-align: center;
@@ -79,6 +243,16 @@
           <h3>Court Blazer Max</h3>
           <span class="price">$159.99</span>
           <p>Lightweight cushioning with a responsive midsole built for quick cuts and explosive drives to the basket.</p>
+          <div class="stats">
+            <button class="stat-toggle" onclick="toggleStats(this)">Show Stats</button>
+            <div class="stat-bars" data-cushioning="88" data-traction="75" data-support="70" data-weight="92" data-breathability="85">
+              <div class="stat-row"><div class="stat-label"><span>Cushioning</span><span>88</span></div><div class="stat-track"><div class="stat-fill cushioning"></div></div></div>
+              <div class="stat-row"><div class="stat-label"><span>Traction</span><span>75</span></div><div class="stat-track"><div class="stat-fill traction"></div></div></div>
+              <div class="stat-row"><div class="stat-label"><span>Support</span><span>70</span></div><div class="stat-track"><div class="stat-fill support"></div></div></div>
+              <div class="stat-row"><div class="stat-label"><span>Weight</span><span>92</span></div><div class="stat-track"><div class="stat-fill weight"></div></div></div>
+              <div class="stat-row"><div class="stat-label"><span>Breathability</span><span>85</span></div><div class="stat-track"><div class="stat-fill breathability"></div></div></div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -88,6 +262,16 @@
           <h3>Air Dunk Pro</h3>
           <span class="price">$189.99</span>
           <p>Maximum ankle support paired with a herringbone outsole for superior traction on any court surface.</p>
+          <div class="stats">
+            <button class="stat-toggle" onclick="toggleStats(this)">Show Stats</button>
+            <div class="stat-bars" data-cushioning="80" data-traction="95" data-support="93" data-weight="65" data-breathability="72">
+              <div class="stat-row"><div class="stat-label"><span>Cushioning</span><span>80</span></div><div class="stat-track"><div class="stat-fill cushioning"></div></div></div>
+              <div class="stat-row"><div class="stat-label"><span>Traction</span><span>95</span></div><div class="stat-track"><div class="stat-fill traction"></div></div></div>
+              <div class="stat-row"><div class="stat-label"><span>Support</span><span>93</span></div><div class="stat-track"><div class="stat-fill support"></div></div></div>
+              <div class="stat-row"><div class="stat-label"><span>Weight</span><span>65</span></div><div class="stat-track"><div class="stat-fill weight"></div></div></div>
+              <div class="stat-row"><div class="stat-label"><span>Breathability</span><span>72</span></div><div class="stat-track"><div class="stat-fill breathability"></div></div></div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -97,12 +281,148 @@
           <h3>Rebound Elite</h3>
           <span class="price">$144.99</span>
           <p>Engineered mesh upper keeps your feet cool while the zoom unit delivers energy return on every step.</p>
+          <div class="stats">
+            <button class="stat-toggle" onclick="toggleStats(this)">Show Stats</button>
+            <div class="stat-bars" data-cushioning="82" data-traction="78" data-support="75" data-weight="88" data-breathability="96">
+              <div class="stat-row"><div class="stat-label"><span>Cushioning</span><span>82</span></div><div class="stat-track"><div class="stat-fill cushioning"></div></div></div>
+              <div class="stat-row"><div class="stat-label"><span>Traction</span><span>78</span></div><div class="stat-track"><div class="stat-fill traction"></div></div></div>
+              <div class="stat-row"><div class="stat-label"><span>Support</span><span>75</span></div><div class="stat-track"><div class="stat-fill support"></div></div></div>
+              <div class="stat-row"><div class="stat-label"><span>Weight</span><span>88</span></div><div class="stat-track"><div class="stat-fill weight"></div></div></div>
+              <div class="stat-row"><div class="stat-label"><span>Breathability</span><span>96</span></div><div class="stat-track"><div class="stat-fill breathability"></div></div></div>
+            </div>
+          </div>
         </div>
       </div>
 
     </div>
+
+    <!-- Comparison Tool -->
+    <div class="compare-section">
+      <h2>Compare Shoes</h2>
+      <div class="compare-controls">
+        <select id="shoe-left">
+          <option value="">Select a shoe...</option>
+          <option value="court-blazer-max">Court Blazer Max</option>
+          <option value="air-dunk-pro">Air Dunk Pro</option>
+          <option value="rebound-elite">Rebound Elite</option>
+        </select>
+        <span class="vs">VS</span>
+        <select id="shoe-right">
+          <option value="">Select a shoe...</option>
+          <option value="court-blazer-max">Court Blazer Max</option>
+          <option value="air-dunk-pro">Air Dunk Pro</option>
+          <option value="rebound-elite">Rebound Elite</option>
+        </select>
+        <button class="compare-btn" onclick="compare()">Compare</button>
+      </div>
+      <div class="compare-result" id="compare-result">
+        <table class="compare-table">
+          <thead>
+            <tr><th>Stat</th><th id="cmp-name-left"></th><th id="cmp-name-right"></th></tr>
+          </thead>
+          <tbody id="cmp-tbody"></tbody>
+        </table>
+        <div class="compare-visual" id="compare-visual"></div>
+        <div class="compare-legend">
+          <span class="leg-left" id="leg-left-name"></span>
+          <span class="leg-right" id="leg-right-name"></span>
+        </div>
+      </div>
+    </div>
   </div>
 
   <footer>&copy; 2026 Basketball Shoes</footer>
+
+  <script>
+    var shoes = {
+      'court-blazer-max': { name: 'Court Blazer Max', price: '$159.99', cushioning: 88, traction: 75, support: 70, weight: 92, breathability: 85 },
+      'air-dunk-pro':     { name: 'Air Dunk Pro',     price: '$189.99', cushioning: 80, traction: 95, support: 93, weight: 65, breathability: 72 },
+      'rebound-elite':    { name: 'Rebound Elite',    price: '$144.99', cushioning: 82, traction: 78, support: 75, weight: 88, breathability: 96 }
+    };
+
+    var statKeys = ['cushioning', 'traction', 'support', 'weight', 'breathability'];
+
+    function toggleStats(btn) {
+      var bars = btn.nextElementSibling;
+      var isOpen = bars.classList.toggle('open');
+      btn.textContent = isOpen ? 'Hide Stats' : 'Show Stats';
+      btn.classList.toggle('active', isOpen);
+      if (isOpen) {
+        var fills = bars.querySelectorAll('.stat-fill');
+        fills.forEach(function(fill) {
+          var key = fill.classList[1];
+          var val = bars.getAttribute('data-' + key);
+          setTimeout(function() { fill.style.width = val + '%'; }, 50);
+        });
+      } else {
+        bars.querySelectorAll('.stat-fill').forEach(function(f) { f.style.width = '0'; });
+      }
+    }
+
+    function compare() {
+      var leftId = document.getElementById('shoe-left').value;
+      var rightId = document.getElementById('shoe-right').value;
+      if (!leftId || !rightId) { alert('Please select two shoes to compare.'); return; }
+      if (leftId === rightId) { alert('Please select two different shoes.'); return; }
+
+      var left = shoes[leftId];
+      var right = shoes[rightId];
+      var result = document.getElementById('compare-result');
+
+      document.getElementById('cmp-name-left').textContent = left.name;
+      document.getElementById('cmp-name-right').textContent = right.name;
+
+      var tbody = document.getElementById('cmp-tbody');
+      tbody.innerHTML = '';
+
+      // Price row
+      var priceRow = document.createElement('tr');
+      priceRow.innerHTML = '<td>Price</td><td>' + left.price + '</td><td>' + right.price + '</td>';
+      tbody.appendChild(priceRow);
+
+      statKeys.forEach(function(key) {
+        var tr = document.createElement('tr');
+        var label = key.charAt(0).toUpperCase() + key.slice(1);
+        var lVal = left[key];
+        var rVal = right[key];
+        var lClass = lVal > rVal ? ' class="winner"' : '';
+        var rClass = rVal > lVal ? ' class="winner"' : '';
+        tr.innerHTML = '<td>' + label + '</td><td' + lClass + '>' + lVal + '</td><td' + rClass + '>' + rVal + '</td>';
+        tbody.appendChild(tr);
+      });
+
+      // Visual bars
+      var visual = document.getElementById('compare-visual');
+      visual.innerHTML = '';
+      statKeys.forEach(function(key) {
+        var lVal = left[key];
+        var rVal = right[key];
+        var total = lVal + rVal;
+        var lPct = (lVal / total * 100).toFixed(1);
+        var rPct = (rVal / total * 100).toFixed(1);
+        var label = key.charAt(0).toUpperCase() + key.slice(1);
+
+        var row = document.createElement('div');
+        row.className = 'compare-stat-row';
+        row.innerHTML =
+          '<div class="csr-label">' + label + '</div>' +
+          '<div class="csr-bars">' +
+            '<div class="csr-bar-left" style="width:0">' + lVal + '</div>' +
+            '<div class="csr-bar-right" style="width:0">' + rVal + '</div>' +
+          '</div>';
+        visual.appendChild(row);
+
+        setTimeout(function() {
+          row.querySelector('.csr-bar-left').style.width = lPct + '%';
+          row.querySelector('.csr-bar-right').style.width = rPct + '%';
+        }, 50);
+      });
+
+      document.getElementById('leg-left-name').textContent = left.name;
+      document.getElementById('leg-right-name').textContent = right.name;
+
+      result.classList.add('open');
+    }
+  </script>
 </body>
 </html>
