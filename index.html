@@ -70,6 +70,10 @@
     .brand-nb      { background: #e8f5e9; }
     .brand-puma    { background: #fff8e1; }
     .brand-ua      { background: #f3e5f5; }
+    .brand-lining  { background: #ffe0e0; }
+    .brand-anta    { background: #e0f0ff; }
+    .brand-converse{ background: #f0e8e0; }
+    .brand-reebok  { background: #e0e0f0; }
 
     .card-body { padding: 1.25rem; }
     .card-body h3 { font-size: 1.15rem; margin-bottom: 0.3rem; }
@@ -89,6 +93,10 @@
     .tag-nb     { background: #e8f5e9; color: #2e7d32; }
     .tag-puma   { background: #fff8e1; color: #f57f17; }
     .tag-ua     { background: #f3e5f5; color: #6a1b9a; }
+    .tag-lining { background: #ffe0e0; color: #c62828; }
+    .tag-anta   { background: #e0f0ff; color: #1565c0; }
+    .tag-converse{ background: #f0e8e0; color: #5d4037; }
+    .tag-reebok { background: #e0e0f0; color: #283593; }
 
     .card-body p { margin-top: 0.4rem; color: #555; font-size: 0.88rem; line-height: 1.45; }
 
@@ -279,6 +287,10 @@
       <button class="filter-btn" onclick="filterBrand('nb')">New Balance</button>
       <button class="filter-btn" onclick="filterBrand('puma')">Puma</button>
       <button class="filter-btn" onclick="filterBrand('ua')">Under Armour</button>
+      <button class="filter-btn" onclick="filterBrand('lining')">Li-Ning</button>
+      <button class="filter-btn" onclick="filterBrand('anta')">Anta</button>
+      <button class="filter-btn" onclick="filterBrand('converse')">Converse</button>
+      <button class="filter-btn" onclick="filterBrand('reebok')">Reebok</button>
     </div>
 
     <div class="grid" id="shoe-grid"></div>
@@ -307,9 +319,11 @@
     </div>
 
     <p class="source-note">
-      Stats sourced from <a href="https://runrepeat.com/catalog/basketball-shoes" target="_blank" rel="noopener">RunRepeat</a> lab-tested reviews.
+      Stats compiled from <a href="https://runrepeat.com/catalog/basketball-shoes" target="_blank" rel="noopener">RunRepeat</a> lab tests,
+      <a href="https://www.thehoopsgeek.com/shoe-reviews/" target="_blank" rel="noopener">The Hoops Geek</a> expert aggregates, and
+      <a href="https://weartesters.com/category/performance-reviews/basketball-shoes-reviews/" target="_blank" rel="noopener">WearTesters</a> performance reviews.
       Overall = weighted average — Traction&nbsp;30%, Cushioning&nbsp;25%, Support&nbsp;25%, Weight&nbsp;12%, Breathability&nbsp;8%.
-      Traction = friction coefficient &times; 100. Cushioning = heel shock absorption mapped to 0–100.
+      Traction = friction coefficient &times; 100 where available. Cushioning = heel shock absorption mapped to 0–100.
       Support = avg of torsional rigidity &amp; heel counter stiffness. Weight = lightness score (lighter&nbsp;=&nbsp;higher). Breathability = /5 &times; 20.
     </p>
   </div>
@@ -457,6 +471,356 @@
         id: 'adidas-harden-vol-10', name: 'Adidas Harden Vol. 10', brand: 'adidas', price: '$170',
         desc: 'Improved traction over Vol. 9 with refined LightBOOST cushioning. Rated 8.6 by experts — reliable traction and strong support features.',
         traction: 75, cushioning: 90, support: 82, weight: 42, breathability: 78
+      },
+      // ── Nike (18 new) ──────────────────────────────────────────
+      {
+        id: 'nike-lebron-21', name: 'Nike LeBron 21', brand: 'nike', price: '$200',
+        desc: 'Elite 0.88 traction with dual Zoom Air units (102/94 SA). 65.7% heel energy return with Cushlon foam. Stiff and heavy.',
+        traction: 88, cushioning: 86, support: 85, weight: 20, breathability: 40
+      },
+      {
+        id: 'nike-lebron-22', name: 'Nike LeBron 22', brand: 'nike', price: '$200',
+        desc: 'Record 0.95 friction coefficient — highest ever tested. Zoom Air + Cushlon 2.0 delivers 104 SA heel. Heavy build.',
+        traction: 95, cushioning: 85, support: 85, weight: 15, breathability: 35
+      },
+      {
+        id: 'nike-kd-17', name: 'Nike KD 17', brand: 'nike', price: '$150',
+        desc: 'Identical cushioning platform to KD 18. Full-length Air strobel + forefoot Zoom at a lighter 13.8 oz with 0.74 traction.',
+        traction: 74, cushioning: 90, support: 80, weight: 52, breathability: 60
+      },
+      {
+        id: 'nike-sabrina-2', name: 'Nike Sabrina 2', brand: 'nike', price: '$130',
+        desc: '68.5% forefoot energy return — one of the most propulsive shoes tested. Ultra-low 17.3mm forefoot stack for court feel.',
+        traction: 71, cushioning: 78, support: 75, weight: 80, breathability: 60
+      },
+      {
+        id: 'nike-sabrina-1', name: 'Nike Sabrina 1', brand: 'nike', price: '$130',
+        desc: 'Record-low 18mm forefoot stack for maximum court feel. React foam with thin forefoot Zoom unit. Lightweight and explosive.',
+        traction: 75, cushioning: 72, support: 80, weight: 78, breathability: 50
+      },
+      {
+        id: 'nike-cosmic-unity-3', name: 'Nike Cosmic Unity 3', brand: 'nike', price: '$170',
+        desc: 'Eco-friendly build with hard 86.5 HC outsole for durability. Average 103 SA heel cushioning. Heavier than predecessor.',
+        traction: 55, cushioning: 83, support: 80, weight: 35, breathability: 40
+      },
+      {
+        id: 'nike-gt-jump-2', name: 'Nike G.T. Jump 2', brand: 'nike', price: '$190',
+        desc: 'Highest shock absorption ever tested — React foam with 35.6mm heel stack and thickest-ever 29.2mm forefoot. 15.6 oz tank.',
+        traction: 70, cushioning: 99, support: 75, weight: 8, breathability: 40
+      },
+      {
+        id: 'nike-ja-1', name: 'Nike Ja 1', brand: 'nike', price: '$110',
+        desc: 'Aggressive herringbone outsole with firm Phylon midsole and forefoot Zoom Air. Low-to-ground court feel at a budget price.',
+        traction: 80, cushioning: 72, support: 75, weight: 76, breathability: 60
+      },
+      {
+        id: 'nike-kobe-8-protro', name: 'Nike Kobe 8 Protro', brand: 'nike', price: '$190',
+        desc: 'Updated with React midsole replacing Lunarlon. Carbon fibre shank and TPU counter. Amazing traction, minimal cushioning.',
+        traction: 85, cushioning: 70, support: 80, weight: 82, breathability: 50
+      },
+      {
+        id: 'nike-lebron-nxxt-gen', name: 'Nike LeBron NXXT Gen', brand: 'nike', price: '$170',
+        desc: 'Akron-map outsole with multi-directional grip. Zoom Air heel + Turbo forefoot. Lightweight at 13.1 oz for LeBron line.',
+        traction: 82, cushioning: 82, support: 82, weight: 60, breathability: 50
+      },
+      {
+        id: 'nike-air-deldon', name: 'Nike Air Deldon', brand: 'nike', price: '$120',
+        desc: "Delle Donne's WNBA signature. Full-length Air + forefoot Zoom Air with FlyEase tech. Just 12 oz with great stability.",
+        traction: 72, cushioning: 78, support: 80, weight: 72, breathability: 50
+      },
+      {
+        id: 'nike-giannis-immortality-3', name: 'Nike Giannis Immortality 3', brand: 'nike', price: '$80',
+        desc: 'Budget beast with reliable herringbone traction and solid support. Great entry-level shoe for recreational ballers.',
+        traction: 72, cushioning: 78, support: 85, weight: 62, breathability: 45
+      },
+      {
+        id: 'nike-precision-7', name: 'Nike Precision 7', brand: 'nike', price: '$75',
+        desc: 'Best budget option. No-frills herringbone traction with basic foam cushioning. Reliable team shoe at the lowest price.',
+        traction: 70, cushioning: 72, support: 75, weight: 55, breathability: 50
+      },
+      {
+        id: 'nike-air-zoom-gt-run', name: 'Nike Air Zoom G.T. Run', brand: 'nike', price: '$180',
+        desc: 'ZoomX midsole delivers maximum energy return for transition play. Designed for speed-first guards who push the pace.',
+        traction: 72, cushioning: 88, support: 70, weight: 78, breathability: 60
+      },
+      {
+        id: 'nike-kd-4-retro', name: 'Nike KD 4 Retro', brand: 'nike', price: '$130',
+        desc: 'True retro with full-length Zoom Air and TPU Adaptive Fit strap. Softened midsole vs OG. Dust-sensitive outsole.',
+        traction: 78, cushioning: 70, support: 80, weight: 55, breathability: 60
+      },
+      {
+        id: 'nike-gt-cut-2', name: 'Nike G.T. Cut 2', brand: 'nike', price: '$170',
+        desc: 'ZoomX midsole with React foam for responsive cuts. Predecessor to the Cut 3. Tight fit with limited breathability.',
+        traction: 75, cushioning: 84, support: 78, weight: 80, breathability: 30
+      },
+      {
+        id: 'nike-kyrie-low-6', name: 'Nike Kyrie Low 6', brand: 'nike', price: '$120',
+        desc: 'Low-to-ground court feel with reliable traction. Zoom Air forefoot for quick guards. Lightweight and responsive.',
+        traction: 78, cushioning: 72, support: 80, weight: 72, breathability: 60
+      },
+      {
+        id: 'nike-air-max-impact-5', name: 'Nike Air Max Impact 5', brand: 'nike', price: '$85',
+        desc: 'Budget-friendly with visible Air Max heel unit and herringbone outsole. Solid starter shoe for casual hoopers.',
+        traction: 70, cushioning: 75, support: 75, weight: 50, breathability: 50
+      },
+      // ── Jordan (13 new) ────────────────────────────────────────
+      {
+        id: 'air-jordan-39', name: 'Air Jordan 39', brand: 'jordan', price: '$200',
+        desc: 'Premium Zoom Strobel with Cushlon 3.0. Refined traction and containment from the AJ 38 with improved upper.',
+        traction: 78, cushioning: 80, support: 85, weight: 48, breathability: 40
+      },
+      {
+        id: 'air-jordan-38', name: 'Air Jordan 38', brand: 'jordan', price: '$185',
+        desc: 'Cushlon 3.0 midsole 60% softer than average. Low-profile 26.3mm heel stack at 13.9 oz. Court-feel focused.',
+        traction: 75, cushioning: 78, support: 80, weight: 50, breathability: 40
+      },
+      {
+        id: 'air-jordan-37', name: 'Air Jordan 37', brand: 'jordan', price: '$185',
+        desc: 'Formula 23 foam with full-length Zoom Strobel and carbon fiber midfoot shank. Lightweight and responsive ride.',
+        traction: 75, cushioning: 82, support: 82, weight: 60, breathability: 45
+      },
+      {
+        id: 'jordan-zion-3', name: 'Jordan Zion 3', brand: 'jordan', price: '$130',
+        desc: 'Low-profile 25.7mm heel stack with small Zoom Air. Lightweight at 13.5 oz with 5/5 heel padding durability.',
+        traction: 74, cushioning: 75, support: 80, weight: 54, breathability: 50
+      },
+      {
+        id: 'jordan-zion-2', name: 'Jordan Zion 2', brand: 'jordan', price: '$120',
+        desc: 'Firm midsole built for bigger players — more weight equals more energy return. Outsole treads excel at lateral moves.',
+        traction: 76, cushioning: 72, support: 82, weight: 50, breathability: 45
+      },
+      {
+        id: 'jordan-tatum-3', name: 'Jordan Tatum 3', brand: 'jordan', price: '$130',
+        desc: 'Best Tatum yet. Cushlon 3.0 + forefoot Zoom Air for all play styles. Rubber cupsole + TPU frame add rigidity.',
+        traction: 68, cushioning: 82, support: 75, weight: 70, breathability: 60
+      },
+      {
+        id: 'jordan-tatum-2', name: 'Jordan Tatum 2', brand: 'jordan', price: '$120',
+        desc: 'Lightweight with improved materials over Tatum 1. Solid traction with standard Cushlon cushioning setup.',
+        traction: 65, cushioning: 72, support: 75, weight: 72, breathability: 55
+      },
+      {
+        id: 'jordan-luka-2', name: 'Jordan Luka 2', brand: 'jordan', price: '$120',
+        desc: 'Heavier than Luka 1 at 14.5 oz with improved upper containment. Formula 23 foam with solid traction and support.',
+        traction: 75, cushioning: 78, support: 85, weight: 34, breathability: 50
+      },
+      {
+        id: 'jordan-luka-1', name: 'Jordan Luka 1', brand: 'jordan', price: '$110',
+        desc: "Luka's personal favorite — he kept wearing it over later models. Formula 23 foam at just 12.8 oz. Great court feel.",
+        traction: 75, cushioning: 76, support: 80, weight: 66, breathability: 55
+      },
+      {
+        id: 'jordan-luka-4', name: 'Jordan Luka 4', brand: 'jordan', price: '$130',
+        desc: 'Maximum 5/5 torsional rigidity with widest forefoot (128.2mm). Cushlon 3.0 + Zoom Air. Moderate 0.64 friction.',
+        traction: 64, cushioning: 74, support: 95, weight: 55, breathability: 50
+      },
+      {
+        id: 'jordan-one-take-5', name: 'Jordan One Take 5', brand: 'jordan', price: '$90',
+        desc: 'Budget Jordan with solid herringbone traction and basic cushioning. Reliable support at a team-shoe price point.',
+        traction: 72, cushioning: 70, support: 78, weight: 58, breathability: 50
+      },
+      {
+        id: 'jordan-why-not-7', name: 'Jordan Why Not .7', brand: 'jordan', price: '$130',
+        desc: "Westbrook's latest with Cushlon 3.0 foam. Aggressive traction pattern for explosive movements and transitions.",
+        traction: 75, cushioning: 78, support: 80, weight: 48, breathability: 45
+      },
+      {
+        id: 'jordan-stay-loyal-3', name: 'Jordan Stay Loyal 3', brand: 'jordan', price: '$80',
+        desc: 'Most affordable Jordan. Herringbone outsole with foam midsole. Solid basics for recreational and youth players.',
+        traction: 70, cushioning: 70, support: 78, weight: 55, breathability: 50
+      },
+      // ── Adidas (10 new) ────────────────────────────────────────
+      {
+        id: 'adidas-ae-1', name: 'Adidas Anthony Edwards 1', brand: 'adidas', price: '$120',
+        desc: 'Elite 0.85 friction nearly matching LeBron 21. Lightstrike + Boost tandem with 61% heel energy return. Massive sidewalls.',
+        traction: 85, cushioning: 82, support: 82, weight: 30, breathability: 50
+      },
+      {
+        id: 'adidas-dame-9', name: 'Adidas Dame 9', brand: 'adidas', price: '$120',
+        desc: 'Full Lightstrike with 105 SA heel. 5/5 torsional rigidity, 4/5 heel counter. Heavy at 14.7 oz. Dust magnet outsole.',
+        traction: 69, cushioning: 87, support: 90, weight: 26, breathability: 30
+      },
+      {
+        id: 'adidas-dame-certified', name: 'Adidas Dame Certified', brand: 'adidas', price: '$100',
+        desc: 'Budget Dame with excellent structural rigidity. Low 20.5mm forefoot stack for court feel. Best budget Adidas.',
+        traction: 72, cushioning: 75, support: 90, weight: 45, breathability: 40
+      },
+      {
+        id: 'adidas-trae-young-3', name: 'Adidas Trae Young 3', brand: 'adidas', price: '$130',
+        desc: 'Top-tier stability with low stack for precise point guard play. 3/5 breathability. Tongue provides main ventilation.',
+        traction: 72, cushioning: 75, support: 90, weight: 35, breathability: 60
+      },
+      {
+        id: 'adidas-harden-vol-8', name: 'Adidas Harden Vol. 8', brand: 'adidas', price: '$160',
+        desc: 'Jet Boost foam with otherworldly foot containment. 75.9 HC outsole favors traction over durability. Bootie construction.',
+        traction: 72, cushioning: 85, support: 82, weight: 38, breathability: 70
+      },
+      {
+        id: 'adidas-don-issue-6', name: 'Adidas D.O.N. Issue 6', brand: 'adidas', price: '$100',
+        desc: 'Record 0.99 friction coefficient — highest ever tested. Lightweight with sticky grip even on dusty courts. Budget gem.',
+        traction: 99, cushioning: 78, support: 80, weight: 55, breathability: 50
+      },
+      {
+        id: 'adidas-exhibit-a', name: 'Adidas Exhibit A', brand: 'adidas', price: '$100',
+        desc: 'Budget team shoe with Lightstrike foam and solid herringbone traction. Wide fit with good lateral containment.',
+        traction: 72, cushioning: 75, support: 78, weight: 45, breathability: 55
+      },
+      {
+        id: 'adidas-trae-young-2', name: 'Adidas Trae Young 2', brand: 'adidas', price: '$120',
+        desc: 'Lightstrike foam with wider platform than TY1. Improved multi-directional traction pattern. Good court feel.',
+        traction: 70, cushioning: 74, support: 78, weight: 40, breathability: 55
+      },
+      {
+        id: 'adidas-dame-8', name: 'Adidas Dame 8', brand: 'adidas', price: '$120',
+        desc: 'Full Lightstrike midsole with excellent containment. Dust-sensitive outsole. Predecessor to the Dame 9.',
+        traction: 68, cushioning: 82, support: 82, weight: 30, breathability: 40
+      },
+      {
+        id: 'adidas-d-rose-son-of-chi-3', name: 'Adidas D Rose Son of Chi 3', brand: 'adidas', price: '$100',
+        desc: 'Budget D Rose with Lightstrike cushioning and solid herringbone traction. Good support at an affordable price.',
+        traction: 72, cushioning: 76, support: 80, weight: 45, breathability: 50
+      },
+      // ── Puma (7 new) ───────────────────────────────────────────
+      {
+        id: 'puma-mb-05', name: 'Puma MB.05', brand: 'puma', price: '$130',
+        desc: "LaMelo's best yet. Improved Nitro cushioning with reliable traction even on dusty courts. Breathable mesh upper.",
+        traction: 78, cushioning: 84, support: 82, weight: 58, breathability: 70
+      },
+      {
+        id: 'puma-mb-04', name: 'Puma MB.04', brand: 'puma', price: '$130',
+        desc: 'Strong bite on clean courts but dust-sensitive. Nitro foam with double-layered mesh. Best for indoor guards.',
+        traction: 72, cushioning: 80, support: 80, weight: 55, breathability: 65
+      },
+      {
+        id: 'puma-mb-03', name: 'Puma MB.03', brand: 'puma', price: '$130',
+        desc: "Better materials and design than MB.01. Nitro foam with solid containment. LaMelo's most stylish signature.",
+        traction: 76, cushioning: 82, support: 82, weight: 58, breathability: 65
+      },
+      {
+        id: 'puma-mb-02', name: 'Puma MB.02', brand: 'puma', price: '$130',
+        desc: 'Great stability with Nitro foam midsole. Solid traction and comfort. Best for players who value containment.',
+        traction: 75, cushioning: 80, support: 84, weight: 55, breathability: 60
+      },
+      {
+        id: 'puma-mb-01', name: 'Puma MB.01', brand: 'puma', price: '$130',
+        desc: "Best basketball shoe of its year. Perfect blend of responsiveness, plushness, stability, and court feel. LaMelo's debut.",
+        traction: 82, cushioning: 84, support: 85, weight: 58, breathability: 65
+      },
+      {
+        id: 'puma-court-rider', name: 'Puma Court Rider', brand: 'puma', price: '$90',
+        desc: 'Budget Puma with ProFoam cushioning and herringbone traction. Lightweight team shoe for recreational play.',
+        traction: 70, cushioning: 72, support: 75, weight: 60, breathability: 60
+      },
+      {
+        id: 'puma-hali-1', name: 'Puma Hali 1', brand: 'puma', price: '$120',
+        desc: "Tyrese Haliburton's debut. Fantastic traction as the standout feature. Nitro foam with solid all-around performance.",
+        traction: 85, cushioning: 80, support: 82, weight: 58, breathability: 65
+      },
+      // ── New Balance (4 new) ────────────────────────────────────
+      {
+        id: 'nb-fresh-foam-bb-v3', name: 'New Balance Fresh Foam BB V3', brand: 'nb', price: '$135',
+        desc: 'Elite traction with dual-density Fresh Foam X. TPU plate for propulsion. Breathable 3D-printed mesh containment.',
+        traction: 84, cushioning: 92, support: 82, weight: 40, breathability: 65
+      },
+      {
+        id: 'nb-fresh-foam-bb-v2', name: 'New Balance Fresh Foam BB V2', brand: 'nb', price: '$130',
+        desc: 'Best NB shock absorption — 118 SA with incredibly soft 13.1 HA foam. 34.9mm heel stack. Beast indoors and outdoors.',
+        traction: 82, cushioning: 96, support: 85, weight: 25, breathability: 30
+      },
+      {
+        id: 'nb-two-wxy-v4', name: 'New Balance TWO WXY V4', brand: 'nb', price: '$120',
+        desc: 'Top outdoor option with durable outsole. FuelCell + Fresh Foam combo. Excellent value at $120 for street hoopers.',
+        traction: 78, cushioning: 82, support: 85, weight: 48, breathability: 55
+      },
+      {
+        id: 'nb-hesi-low-v2', name: 'New Balance Hesi Low V2', brand: 'nb', price: '$100',
+        desc: "Light at 12.9 oz with firm foam for court feel. Grippy and stable — RunRepeat's best shoe for beginners.",
+        traction: 76, cushioning: 72, support: 80, weight: 64, breathability: 55
+      },
+      // ── Under Armour (3 new) ───────────────────────────────────
+      {
+        id: 'ua-curry-11', name: 'Under Armour Curry 11', brand: 'ua', price: '$160',
+        desc: 'Dual-density Flow sole — excellent traction with no rubber outsole. Most comfortable Curry after break-in. Dust magnet.',
+        traction: 84, cushioning: 82, support: 78, weight: 74, breathability: 70
+      },
+      {
+        id: 'ua-curry-flow-10', name: 'Under Armour Curry Flow 10', brand: 'ua', price: '$160',
+        desc: 'Single-density Flow compound — excellent traction but denser cushioning than Curry 11. Solid all-around performer.',
+        traction: 82, cushioning: 76, support: 78, weight: 72, breathability: 65
+      },
+      {
+        id: 'ua-curry-flow-9', name: 'Under Armour Curry Flow 9', brand: 'ua', price: '$160',
+        desc: 'Excellent Flow technology traction. Slightly denser ride than Curry 10/11. Reliable and consistent performer.',
+        traction: 80, cushioning: 74, support: 78, weight: 72, breathability: 65
+      },
+      // ── Li-Ning (5 new) ────────────────────────────────────────
+      {
+        id: 'lining-wow-ac13-encore', name: 'Li-Ning WoW All City 13 Encore', brand: 'lining', price: '$150',
+        desc: 'Top-tier all-around performer. Fantastic traction, elite Boom cushioning, and elite support. No glaring weaknesses.',
+        traction: 88, cushioning: 90, support: 90, weight: 50, breathability: 55
+      },
+      {
+        id: 'lining-wow-ac13', name: 'Li-Ning WoW All City 13', brand: 'lining', price: '$150',
+        desc: 'Full-length Boom foam with versatile traction on clean and dusty courts. Elite cushioning at a mid-tier price.',
+        traction: 85, cushioning: 88, support: 88, weight: 48, breathability: 55
+      },
+      {
+        id: 'lining-wade-808-5-ultra', name: 'Li-Ning Wade 808 5 Ultra', brand: 'lining', price: '$120',
+        desc: 'Super Boom cushioning — crazy comfortable and bouncy. Full herringbone traction. Best for quick, explosive guards.',
+        traction: 84, cushioning: 92, support: 82, weight: 55, breathability: 55
+      },
+      {
+        id: 'lining-wow-ac12', name: 'Li-Ning WoW All City 12', brand: 'lining', price: '$140',
+        desc: 'Top-tier traction and Boom foam cushioning. Chunky multidirectional tread with great outdoor durability.',
+        traction: 84, cushioning: 86, support: 85, weight: 50, breathability: 55
+      },
+      {
+        id: 'lining-wade-shadow-6', name: 'Li-Ning Wade Shadow 6', brand: 'lining', price: '$100',
+        desc: 'Full-length Boom cushioning in a durable build. Slim fit with limited US availability. Excellent value.',
+        traction: 78, cushioning: 84, support: 80, weight: 52, breathability: 50
+      },
+      // ── Anta (4 new) ───────────────────────────────────────────
+      {
+        id: 'anta-kt-9', name: 'Anta KT 9', brand: 'anta', price: '$130',
+        desc: 'Best traction in years — stops on a dime even on dirty courts. Nitrogen foam closest to Nike Zoom. Any position.',
+        traction: 88, cushioning: 86, support: 85, weight: 50, breathability: 55
+      },
+      {
+        id: 'anta-kai-2', name: 'Anta KAI 2', brand: 'anta', price: '$140',
+        desc: 'Premium signature with elite traction, bouncy cushioning, and superb lockdown. Must-try for guards and shifty players.',
+        traction: 86, cushioning: 84, support: 85, weight: 58, breathability: 55
+      },
+      {
+        id: 'anta-shock-wave-5', name: 'Anta Shock Wave 5', brand: 'anta', price: '$115',
+        desc: "Kyrie Irving's first Anta shoe. Solid all-around performer with outdoor-ready durability. Great value.",
+        traction: 78, cushioning: 78, support: 80, weight: 52, breathability: 50
+      },
+      {
+        id: 'anta-kt-8', name: 'Anta KT 8', brand: 'anta', price: '$120',
+        desc: 'Nitrogen-infused foam with excellent traction pattern. Predecessor to the KT 9 with similar bouncy ride.',
+        traction: 82, cushioning: 82, support: 82, weight: 52, breathability: 50
+      },
+      // ── Converse (2 new) ───────────────────────────────────────
+      {
+        id: 'converse-shai-001', name: 'Converse SHAI 001', brand: 'converse', price: '$130',
+        desc: "SGA's debut signature. Near-perfect indoor traction with forefoot Zoom Air. Low-profile responsive ride for guards.",
+        traction: 84, cushioning: 74, support: 80, weight: 60, breathability: 55
+      },
+      {
+        id: 'converse-bb-shift', name: 'Converse All Star BB Shift', brand: 'converse', price: '$100',
+        desc: 'CX foam + Air Zoom forefoot at just $100. Squeaky-reliable indoor traction. Excellent value for explosive guards.',
+        traction: 78, cushioning: 78, support: 75, weight: 62, breathability: 55
+      },
+      // ── Reebok (2 new) ─────────────────────────────────────────
+      {
+        id: 'reebok-question-mid', name: 'Reebok Question Mid', brand: 'reebok', price: '$140',
+        desc: "Iverson's iconic retro. Rock-hard 89.9 HC outsole excels outdoors. Hexalite heel cushioning. Heavy at 16.7 oz.",
+        traction: 78, cushioning: 70, support: 85, weight: 10, breathability: 60
+      },
+      {
+        id: 'reebok-solution-mid', name: 'Reebok Solution Mid', brand: 'reebok', price: '$85',
+        desc: 'Budget Iverson tribute with solid grip and basic foam cushioning. 4.4-star user rating. Often on sale for $50.',
+        traction: 72, cushioning: 65, support: 78, weight: 40, breathability: 50
       }
     ];
 
@@ -481,9 +845,9 @@
 
     var statKeys = ['overall', 'traction', 'cushioning', 'support', 'weight', 'breathability'];
     var statLabels = { overall: 'Overall', traction: 'Traction', cushioning: 'Cushioning', support: 'Support', weight: 'Weight', breathability: 'Breathability' };
-    var brandColors = { nike: 'brand-nike', jordan: 'brand-jordan', adidas: 'brand-adidas', nb: 'brand-nb', puma: 'brand-puma', ua: 'brand-ua' };
-    var tagColors = { nike: 'tag-nike', jordan: 'tag-jordan', adidas: 'tag-adidas', nb: 'tag-nb', puma: 'tag-puma', ua: 'tag-ua' };
-    var brandNames = { nike: 'Nike', jordan: 'Jordan', adidas: 'Adidas', nb: 'New Balance', puma: 'Puma', ua: 'Under Armour' };
+    var brandColors = { nike: 'brand-nike', jordan: 'brand-jordan', adidas: 'brand-adidas', nb: 'brand-nb', puma: 'brand-puma', ua: 'brand-ua', lining: 'brand-lining', anta: 'brand-anta', converse: 'brand-converse', reebok: 'brand-reebok' };
+    var tagColors = { nike: 'tag-nike', jordan: 'tag-jordan', adidas: 'tag-adidas', nb: 'tag-nb', puma: 'tag-puma', ua: 'tag-ua', lining: 'tag-lining', anta: 'tag-anta', converse: 'tag-converse', reebok: 'tag-reebok' };
+    var brandNames = { nike: 'Nike', jordan: 'Jordan', adidas: 'Adidas', nb: 'New Balance', puma: 'Puma', ua: 'Under Armour', lining: 'Li-Ning', anta: 'Anta', converse: 'Converse', reebok: 'Reebok' };
 
     // Build shoe lookup
     var shoeLookup = {};
