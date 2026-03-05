@@ -74,6 +74,7 @@
     .brand-anta    { background: #e0f0ff; }
     .brand-converse{ background: #f0e8e0; }
     .brand-reebok  { background: #e0e0f0; }
+    .brand-xero    { background: #e0f5f0; }
 
     .card-body { padding: 1.25rem; }
     .card-body h3 { font-size: 1.15rem; margin-bottom: 0.3rem; }
@@ -97,6 +98,7 @@
     .tag-anta   { background: #e0f0ff; color: #1565c0; }
     .tag-converse{ background: #f0e8e0; color: #5d4037; }
     .tag-reebok { background: #e0e0f0; color: #283593; }
+    .tag-xero   { background: #e0f5f0; color: #00695c; }
 
     .card-body p { margin-top: 0.4rem; color: #555; font-size: 0.88rem; line-height: 1.45; }
 
@@ -291,6 +293,7 @@
       <button class="filter-btn" onclick="filterBrand('anta')">Anta</button>
       <button class="filter-btn" onclick="filterBrand('converse')">Converse</button>
       <button class="filter-btn" onclick="filterBrand('reebok')">Reebok</button>
+      <button class="filter-btn" onclick="filterBrand('xero')">Xero</button>
     </div>
 
     <div class="grid" id="shoe-grid"></div>
@@ -813,6 +816,11 @@
         traction: 49, cushioning: 56, support: 80, weight: 72, breathability: 20
       },
       {
+        id: 'xero-x1', name: 'Xero X1', brand: 'xero', price: '$170',
+        desc: 'First barefoot basketball shoe. Zero-drop, wide toe box, 11.8 oz. Grippy traction but minimal cushioning and support — for natural movement believers only.',
+        traction: 75, cushioning: 32, support: 42, weight: 64, breathability: 58
+      },
+      {
         id: 'anta-kai-1', name: 'Anta KAI 1', brand: 'anta', price: '$130',
         desc: "Kyrie's first Anta signature. Full-length Nitro Edge foam, elite support with TPU wrap, carbon fiber shank, and forefoot strap. Best for guards on clean courts.",
         traction: 79, cushioning: 82, support: 91, weight: 48, breathability: 55
@@ -843,9 +851,9 @@
 
     var statKeys = ['overall', 'traction', 'cushioning', 'support', 'weight', 'breathability'];
     var statLabels = { overall: 'Overall', traction: 'Traction', cushioning: 'Cushioning', support: 'Support', weight: 'Weight', breathability: 'Breathability' };
-    var brandColors = { nike: 'brand-nike', jordan: 'brand-jordan', adidas: 'brand-adidas', nb: 'brand-nb', puma: 'brand-puma', ua: 'brand-ua', lining: 'brand-lining', anta: 'brand-anta', converse: 'brand-converse', reebok: 'brand-reebok' };
-    var tagColors = { nike: 'tag-nike', jordan: 'tag-jordan', adidas: 'tag-adidas', nb: 'tag-nb', puma: 'tag-puma', ua: 'tag-ua', lining: 'tag-lining', anta: 'tag-anta', converse: 'tag-converse', reebok: 'tag-reebok' };
-    var brandNames = { nike: 'Nike', jordan: 'Jordan', adidas: 'Adidas', nb: 'New Balance', puma: 'Puma', ua: 'Under Armour', lining: 'Li-Ning', anta: 'Anta', converse: 'Converse', reebok: 'Reebok' };
+    var brandColors = { nike: 'brand-nike', jordan: 'brand-jordan', adidas: 'brand-adidas', nb: 'brand-nb', puma: 'brand-puma', ua: 'brand-ua', lining: 'brand-lining', anta: 'brand-anta', converse: 'brand-converse', reebok: 'brand-reebok', xero: 'brand-xero' };
+    var tagColors = { nike: 'tag-nike', jordan: 'tag-jordan', adidas: 'tag-adidas', nb: 'tag-nb', puma: 'tag-puma', ua: 'tag-ua', lining: 'tag-lining', anta: 'tag-anta', converse: 'tag-converse', reebok: 'tag-reebok', xero: 'tag-xero' };
+    var brandNames = { nike: 'Nike', jordan: 'Jordan', adidas: 'Adidas', nb: 'New Balance', puma: 'Puma', ua: 'Under Armour', lining: 'Li-Ning', anta: 'Anta', converse: 'Converse', reebok: 'Reebok', xero: 'Xero Shoes' };
 
     // Build shoe lookup
     var shoeLookup = {};
